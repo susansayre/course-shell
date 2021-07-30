@@ -1,7 +1,9 @@
 # IDEs
 .idea/
-
 # Hugo
 resources/
 public/
 jsconfig.json
+.Rproj.user
+themes/
+.Rhistory

@@ -1,7 +1,7 @@
 ---
 title: Docs
-type: book  # Do not modify.
 toc: false
+type: book
 ---
 
 Welcome to the _Project Docs_ template!
