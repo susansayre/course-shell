@@ -1,5 +1,5 @@
 ---
-title: Course Details
+title: Course Name
 toc: false
 type: book
 ---
