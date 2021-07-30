@@ -11,7 +11,7 @@ main:
     url: docs/details
     weight: 20
   - name: Schedule
-    url: docs/calendar
+    url: docs/details/calendar
     weight: 30
   - name: Assignments
     url: docs/assignments
