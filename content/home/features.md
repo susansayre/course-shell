@@ -2,19 +2,19 @@
 widget: featurette
 headless: true
 weight: 20
-title: Features
-subtitle: Document _anything_ ✨
+title: Course Objectives
+subtitle: In this course, you'll learn
 feature:
   - icon: book-open
     icon_pack: fas
-    name: Project Documentation
+    name: Objective 1
     description: For users
   - icon: question
     icon_pack: fas
-    name: Knowledge Base
+    name: Objective 2
     description: For teams
   - icon: list-alt
     icon_pack: fas
-    name: Personal Notebook
+    name: Objective 3
     description: For yourself
 ---
