@@ -1,0 +1,11 @@
+---
+title: assignTitle
+linktitle: shortname
+type: book
+draft: true
+weight: 1
+---
+
+## Submission details
+
+## Guidelines

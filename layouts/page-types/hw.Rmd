@@ -1,0 +1,11 @@
+---
+title: Homework Num
+linktitle: HWNum
+type: book
+draft: true
+weight: 1
+---
+
+## Submission details
+
+## Guidelines
