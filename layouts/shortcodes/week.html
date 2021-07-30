@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="row">
+  {{with .Params}}<b>Week {{- with $.Get 0 -}}{{ .}}{{- end -}}</b>{{- end -}}
+{{ .Inner }}
+  </div>
+</div>
+<hr>

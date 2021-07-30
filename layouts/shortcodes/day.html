@@ -1,0 +1,4 @@
+<div class="col-sm">
+  {{with .Params}}<b>{{- with $.Get 0 -}}{{.}}{{- end -}}</b><br>{{- end -}}
+      {{ .Inner | markdownify}}
+</div>
