@@ -1,3 +1,6 @@
+library(tidyverse)
+library(here)
+
 new_hw <- function(number, dir = "docs/homework", standalone = T, type = "book"){
   
   file_dir <- here::here("content", dir)
@@ -30,6 +33,41 @@ new_hw <- function(number, dir = "docs/homework", standalone = T, type = "book")
   z <- gsub("weight: 1", paste0("weight: ", as.character(number*10)), y)
   
   out <- cat(z, file = filename, sep = "\n")
+  file.edit(filename)
+}
+
+new_post <- function(title, dir = "post", 
+                     standalone = T, 
+                     type = "post", 
+                     ext = ".Rmd",
+                     date = Sys.Date()){
+  
+  file_dir <- here::here("content", dir)
+  
+  if (standalone) {
+  filename <- file.path(file_dir, str_c(str_replace_all(tolower(title), " ", "-"), ext))
+} else {
+  
+  file_dir <- file.path(file_dir, str_c(str_replace_all(tolower(title), " ", "-")))
+  filename <- str_c(file_dir, "/_index", ext)
+  
+  if (!file.exists(file_dir)){
+    dir.create(file_dir, recursive = T)
+    
+  }}
+  
+  if (file.exists(filename)) {
+    print(paste0(filename, " already exists"))
+    return(0)
+  }
+
+  x <- c("---",
+                 str_c("title: ", title),
+                 str_c("date: ", date),
+                 "draft: true",
+                 "---")
+  out <- cat(x, file = filename, sep = "\n")
+  file.edit(filename)
   
 }
 
@@ -65,5 +103,55 @@ new_assign <- function(filename, name, linkname = name, dir = "docs/assignments"
   z <- gsub("shortname", linkname, y)
   
   out <- cat(z, file = filename, sep = "\n")
+  file.edit(filename)
+  
+}
+
+local_edit <- function(string, path = here::here("content")){
+  
+  file_list <- list.files(path = path, recursive = T, full.names = T)
+  
+  #Try .Rmd files first
+  my_list <- file_list[str_detect(file_list, str_c(string, ".Rmd"))]
+
+  #Try .md files next
+  if (length(my_list)==0) {
+    my_list <- file_list[str_detect(file_list, str_c(string, ".md"))]
+  }
+  
+  #Try index files next
+  if (length(my_list)==0) {
+    long_list <- file_list[str_detect(file_list, string)]
+    
+    my_list <- long_list[str_detect(long_list, "index.Rmd")]
+    
+    #Now string/_index.md
+    if (length(my_list)==0) {
+      my_list <- long_list[str_detect(long_list, "index.md")]
+    }
+  }
+  
+  if (length(my_list)==0) {
+    
+    matches_pattern <- file_list[str_detect(file_list, string)]
+    
+    if (length(as.list(matches_pattern)) > 1) {
+      print(matches_pattern)
+      file_number = readline(prompt = "Matches multiple files. Which one do you want to edit?")
+      
+      file_name <- matches_pattern[as.integer(file_number)] 
+    } else {
+      file_name <- matches_pattern
+    } 
+  } else if (length(as.list(my_list))>1) {
+    
+    print(my_list)
+    file_number = readline(prompt = "Matches multiple files. Which one do you want to edit?")
+    file_name <- my_list[as.integer(file_number)]
+  } else {
+    file_name <- my_list
+  }
+  
+  if (!is.null(file_name)) file.edit(file_name)
   
 }
